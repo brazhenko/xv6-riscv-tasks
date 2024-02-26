@@ -503,3 +503,13 @@ sys_pipe(void)
   }
   return 0;
 }
+
+
+uint64 sys_freemem(void)
+{
+  uint64 res;
+
+  res = kfreemem();
+
+  return res;
+}
