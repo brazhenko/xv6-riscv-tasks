@@ -48,6 +48,13 @@ w_mepc(uint64 x)
 #define SSTATUS_SIE (1L << 1)  // Supervisor Interrupt Enable
 #define SSTATUS_UIE (1L << 0)  // User Interrupt Enable
 
+static inline uint64 a7reg()
+{
+  unsigned long a1_val = 0;
+  asm volatile ("mv %0, a7" : "=r"(a1_val) : :);
+  return a1_val;
+}
+
 static inline uint64
 r_sstatus()
 {

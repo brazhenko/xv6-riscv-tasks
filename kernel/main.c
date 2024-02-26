@@ -3,6 +3,7 @@
 #include "memlayout.h"
 #include "riscv.h"
 #include "defs.h"
+#include "fdt.h"
 
 volatile static int started = 0;
 
@@ -14,6 +15,8 @@ main()
     consoleinit();
     printfinit();
     printf("\n");
+    parse_dtb();
+
     printf("xv6 kernel is booting\n");
     printf("\n");
     kinit();         // physical page allocator
