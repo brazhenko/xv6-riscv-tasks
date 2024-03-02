@@ -1,0 +1,16 @@
+This task is about mastering gdb.
+
+Here are the steps to reproduce.
+
+On host machine:
+make qemu-gdb
+./riscv64-unknown-elf-gdb
+continue ; ctrl + C 
+break sys_sbrk
+*call you ./grow binary*
+continue (to our sbrk call)
+step (till uvmalloc in growproc)
+print *p
+x/5xg 0x87f43000 (this is the addr put in SATP)
+use >> 10 << 12 to calculated nexted address.
+The answer is "one new page was allocated", which address is (0x21fd1017 >> 10 << 12)
