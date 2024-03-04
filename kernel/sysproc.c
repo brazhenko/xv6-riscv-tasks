@@ -36,16 +36,24 @@ sys_wait(void)
 }
 
 uint64
-sys_sbrk(void)
+sys_lazy_sbrk(void)
 {
   uint64 addr;
   int n;
 
   argint(0, &n);
   addr = myproc()->sz;
-  if(growproc(n) < 0)
+  if(lazy_growproc(n) < 0)
     return -1;
   return addr;
+}
+
+
+
+uint64
+sys_sbrk(void)
+{
+  return sys_lazy_sbrk();
 }
 
 uint64
